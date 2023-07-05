@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Test Music
+    </title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!--   <% if (messages.error) { %>
+      <p style="color:red"><%- messages.error %></p>
+    <% } %> -->
+
+    <div class="container">
+        <h1 class="text-center mt-3 mb-3"><%= title %></h1>
+
+        <% if(action == 'add') { %>
+
+            <div class="card">
+                <div class="card-header">Add New Music</div>
+                <div class="card-body">
+                    <form method="POST" action="/list/add-new">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Package Name</label>
+                                    <input type="text" name="packagename" id="packagename" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Artist Name</label>
+                                    <input type="text" name="artistname" id="artistname" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Date Release</label>
+                                    <input type="date" name="releasedate" id="releasedate" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Sample Url</label>
+                                    <input type="text" name="sampleurl" id="sampleurl" class="form-control" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" name="submit_button" class="btn btn-primary" value="Add" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <% } else if (action == 'edit') {  %>
+                <div class="card">
+                    <div class="card-header">Sample Form</div>
+                    <div class="card-body">
+                        <form method="POST" action="/list/edit/<%= id %>">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Package Name</label>
+                                        <input type="text" name="packagename" id="packagename" class="form-control" value="<%= data.packagename %>" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Artist Name</label>
+                                        <input type="text" name="artistname" id="artistname" class="form-control" value="<%= data.artistname %>" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Date Release</label>
+                                        <input type="date" name="releasedate" id="releasedate" class="form-control" value="<%= data.releasedate %>" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Sample Url</label>
+                                        <input type="text" name="sampleurl" id="sampleurl" class="form-control" value="<%= data.sampleurl %>" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="submit" name="submit_button" class="btn btn-primary" value="Edit" />
+                            </div>
+                        </form>
+                      
+                    </div>
+                </div>
+                <% }else { %> 
+                <a class="btn btn-primary edit" href="/list/add"
+                    >Add New</a
+                  >
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Package Name</th>
+          <th scope="col">Artist Name</th>
+          <th scope="col">Date Release</th>
+          
+          <th width="200px">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(data.length){ for(var i = 0; i< data.length; i++) {%>
+        <tr>
+          <th scope="row"><%= (i+1) %></th>
+          <td><%= data[i].packagename%></td>
+          <td><%= data[i].artistname%></td>
+          <td><%= data[i].releasedate%></td>
+          <td>
+            <a class="btn btn-success edit" href="../list/edit/<%=data[i].id%>"
+              >Edit</a
+            >  
+            <a href="/list/delete/<%= data[i].id %>" class="btn btn-danger ">Delete</a>
+          </td>
+        </tr>
+        <% } }else{ %>
+        <tr>
+          <td colspan="3">No user</td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <% }  %>
+  </body>
+</html>
