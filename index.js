@@ -12,8 +12,8 @@ var bodyParser = require("body-parser");
 // var pg = require("pg");
 // var connection = require("/database");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/music");
+var indexRouter = require("./src/routes/index");
+var usersRouter = require("./src/routes/music");
 
 var app = express();
 
